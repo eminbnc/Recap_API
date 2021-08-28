@@ -11,6 +11,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Extensions;
+using AutoMapper;
+using Business.Mappings.AutoMapper;
+using Business.DependencyResolvers.AutofacBusinessModule;
+using Core.ErrorCatchMiddleware;
+using Core.Utilities.IoC;
+using Core.DependencyResolvers;
+using Core.Utilities.Security.JWT;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Core.Utilities.Security.Encryption;
+using Microsoft.IdentityModel.Tokens;
 
 namespace RecapAPI
 {
@@ -28,10 +39,31 @@ namespace RecapAPI
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
+            services.RegisterHandlers();
+            var mappingConfig = new MapperConfiguration(mc =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RecapAPI", Version = "v1" });
+                mc.AddProfile(new BusinessProfile());
             });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
+            services.AddSingleton(new AutofacBusinessModule());
+            services.AddDependencyResolvers(new ICoreModule[] { new CoreModule() });
+            var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidIssuer = tokenOptions.Issuer,
+                    ValidAudience = tokenOptions.Audience,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+                };
+            });
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,10 +75,15 @@ namespace RecapAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RecapAPI v1"));
             }
-
+            app.ConfigureCustomExceptionMiddleware();
+            app.UseCors(builder => builder.AllowAnyOrigin());
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
