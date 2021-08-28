@@ -16,12 +16,10 @@ namespace Business.Handlers.CommandHandlers.UserCommandHandler
     {
         private readonly IUserDal _userDal;
         private readonly ITokenHelper _tokenHelper;
-        private ICacheManager _cacheManager;
         public UserForLoginCommandHandler(IUserDal userDal, ITokenHelper tokenHelper, ICacheManager cacheManager)
         {
             _userDal = userDal;
             _tokenHelper = tokenHelper;
-            _cacheManager = cacheManager;
         }
 
         [ValidationAspect(typeof(UserLoginValidator), Priority = 1)]

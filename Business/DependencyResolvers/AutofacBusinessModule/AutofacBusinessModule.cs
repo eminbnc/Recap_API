@@ -13,7 +13,9 @@ namespace Business.DependencyResolvers.AutofacBusinessModule
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
-            builder.RegisterType<JWTHelper>().As<ITokenHelper>().SingleInstance(); 
+            builder.RegisterType<JWTHelper>().As<ITokenHelper>().SingleInstance();
+            builder.RegisterType<EfUserOperationClaimDal>().As<IUserOperationClaimDal>().SingleInstance();
+
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
             .EnableInterfaceInterceptors(new ProxyGenerationOptions()

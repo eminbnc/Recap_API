@@ -23,7 +23,6 @@ namespace DataAccess.Concrete.EntityFramework.Context
         public DbSet<Language> Languages { get; set; }
         public DbSet<Resume> Resumes { get; set; }
         public DbSet<School> Schools { get; set; }
-        public DbSet<UserJobPosting> UserJobPostings { get; set; }
         public DbSet<WorkExperience> WorkExperiences { get; set; }
     }
 }
