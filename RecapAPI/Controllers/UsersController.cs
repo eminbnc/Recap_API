@@ -1,22 +1,19 @@
 ﻿using Business.Commands.UserCommands;
-using Entities.DTO.Request;
+using Business.Queries.UserQueries;
+using Entities.DTO.Request.UserRequest;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace RecapAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public UserController(IMediator mediatr)
+        public UsersController(IMediator mediatr)
         {
             _mediator = mediatr;
         }
@@ -41,6 +38,17 @@ namespace RecapAPI.Controllers
         public async Task<IActionResult> RegisterForUser(UserForRegisterRequest registerRequest)
         {
             var result = await _mediator.Send(new UserForRegisterCommand(registerRequest));
+            if (result.Success) return Ok(result);
+            return BadRequest(result);
+        }
+        /// <summary>
+        /// Get All Accessible Users
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetAllUser()
+        {
+            var result = await _mediator.Send(new GetAllUserQuery());
             if (result.Success) return Ok(result);
             return BadRequest(result);
         }

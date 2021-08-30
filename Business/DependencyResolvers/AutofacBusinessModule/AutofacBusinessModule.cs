@@ -15,6 +15,7 @@ namespace Business.DependencyResolvers.AutofacBusinessModule
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
             builder.RegisterType<JWTHelper>().As<ITokenHelper>().SingleInstance();
             builder.RegisterType<EfUserOperationClaimDal>().As<IUserOperationClaimDal>().SingleInstance();
+            builder.RegisterType<EfCompanyOperationClaimDal>().As<ICompanyOperationClaimDal>().SingleInstance();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RecapAPI</name>
+    </assembly>
+    <members>
+        <member name="M:RecapAPI.Controllers.CompaniesController.Login(Entities.DTO.Request.CompanyRequest.CompanyForLoginRequest)">
+            <summary>
+            Company Login Operation
+            </summary>
+            <param name="loginRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RecapAPI.Controllers.CompaniesController.RegisterForUser(Entities.DTO.Request.CompanyRequest.CompanyForRegisterRequest)">
+            <summary>
+            Company Registration Operation
+            </summary>
+            <param name="registerRequest"></param>
+            
+            
+            <returns></returns>
+        </member>
+        <member name="M:RecapAPI.Controllers.UsersController.Login(Entities.DTO.Request.UserRequest.UserForLoginRequest)">
+            <summary>
+            User Login Operation
+            </summary>
+            <param name="loginRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RecapAPI.Controllers.UsersController.RegisterForUser(Entities.DTO.Request.UserRequest.UserForRegisterRequest)">
+            <summary>
+            User Registration Operation
+            </summary>
+            <param name="registerRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RecapAPI.Controllers.UsersController.GetAllUser">
+            <summary>
+            Get All Accessible Users
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

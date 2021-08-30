@@ -1,8 +1,11 @@
-﻿using Business.Commands.UserCommands;
+﻿using AutoMapper;
+using Business.Commands.UserCommands;
 using Business.Constants;
-using Business.Validation.FluentValidation;
+using Business.Validation.FluentValidation.UserValidation;
+using Core.Aspect.Autofac.Caching;
 using Core.Aspect.Autofac.Validation;
 using Core.CrossCuttingConcerns.Caching;
+using Core.Entities.ClaimInformation;
 using Core.Utilities.Results;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.JWT;
@@ -16,10 +19,12 @@ namespace Business.Handlers.CommandHandlers.UserCommandHandler
     {
         private readonly IUserDal _userDal;
         private readonly ITokenHelper _tokenHelper;
-        public UserForLoginCommandHandler(IUserDal userDal, ITokenHelper tokenHelper, ICacheManager cacheManager)
+        private readonly IMapper _mapper;
+        public UserForLoginCommandHandler(IUserDal userDal, ITokenHelper tokenHelper, ICacheManager cacheManager, IMapper mapper)
         {
             _userDal = userDal;
             _tokenHelper = tokenHelper;
+            _mapper = mapper;
         }
 
         [ValidationAspect(typeof(UserLoginValidator), Priority = 1)]
@@ -33,7 +38,7 @@ namespace Business.Handlers.CommandHandlers.UserCommandHandler
                 return new ErrorDataResult<AccessToken>(Messages.LoginFailed);
 
             var claims = await _userDal.GetClaims(userToCheck);
-            var accessToken = _tokenHelper.CreateToken(userToCheck, claims);
+            var accessToken = _tokenHelper.CreateToken(_mapper.Map<InformationToAddedClaim>(userToCheck), claims);
             return new SuccessDataResult<AccessToken>(accessToken, Messages.LoginSuccessful);
         }
     }

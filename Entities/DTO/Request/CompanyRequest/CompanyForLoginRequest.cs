@@ -1,6 +1,6 @@
-﻿namespace Entities.DTO.Request
+﻿namespace Entities.DTO.Request.CompanyRequest
 {
-    public class UserForLoginRequest
+    public class CompanyForLoginRequest
     {
         public string Email { get; set; }
         public string Password { get; set; }

@@ -1,6 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Core.Utilities.Security.JWT;
-using Entities.DTO.Request;
+using Entities.DTO.Request.UserRequest;
 using MediatR;
 
 namespace Business.Commands.UserCommands

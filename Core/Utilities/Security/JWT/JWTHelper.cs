@@ -8,6 +8,8 @@ using System.Linq;
 using System.Security.Claims;
 using Microsoft.Extensions.Configuration;
 using Core.Extensions;
+using Core.Entities.ClaimInformation;
+
 namespace Core.Utilities.Security.JWT
 {
     public class JWTHelper:ITokenHelper
@@ -22,7 +24,7 @@ namespace Core.Utilities.Security.JWT
             Configuration = configuration;
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
         }
-        public AccessToken CreateToken(User user, List<OperationClaim> operationClaims)
+        public AccessToken CreateToken(InformationToAddedClaim user, List<OperationClaim> operationClaims)
         {
             _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
             var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
@@ -36,7 +38,7 @@ namespace Core.Utilities.Security.JWT
                 Expiration = _accessTokenExpiration
             };
         }
-        public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user, SigningCredentials signingCredentials, List<OperationClaim> operationClaims)
+        public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, InformationToAddedClaim user, SigningCredentials signingCredentials, List<OperationClaim> operationClaims)
         {
             var jwt = new JwtSecurityToken(
             issuer: tokenOptions.Issuer,
@@ -48,7 +50,7 @@ namespace Core.Utilities.Security.JWT
             );
             return jwt;
         }
-        private IEnumerable<Claim> SetClaims(User user, List<OperationClaim> operationClaims)
+        private IEnumerable<Claim> SetClaims(InformationToAddedClaim user, List<OperationClaim> operationClaims)
         {
             var claims = new List<Claim>();
             claims.AddNameIdentifier(user.Id.ToString());

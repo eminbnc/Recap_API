@@ -1,5 +1,5 @@
 ﻿using Core.Utilities.Results;
-using Entities.DTO.Request;
+using Entities.DTO.Request.UserRequest;
 using MediatR;
 
 namespace Business.Commands.UserCommands

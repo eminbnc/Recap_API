@@ -13,7 +13,7 @@ namespace Business.Validation.FluentValidation
             RuleFor(p => p._userRegisterRequest.Password).Length(6, 20);
             RuleFor(p => p._userRegisterRequest.Adress).NotEmpty();
             RuleFor(p => p._userRegisterRequest.BirthDate).NotEmpty();
-            RuleFor(p => p._userRegisterRequest.Visibility).NotEmpty();
+            
         }
     }
 }
