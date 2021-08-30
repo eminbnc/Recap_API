@@ -2,17 +2,12 @@
 using Business.Commands.CompanyCommands;
 using Business.Constants;
 using Business.Validation.FluentValidation.CompanyValidation;
-using Core.Aspect.Autofac.Transaction;
 using Core.Aspect.Autofac.Validation;
 using Core.Utilities.Results;
 using Core.Utilities.Security.Hashing;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,7 +24,7 @@ namespace Business.Handlers.CommandHandlers.CompanyCommandHandlers
             _companyOperationClaimDal = companyOperationClaimDal;
             _mapper = mapper;
         }
-        [TransactionScopeAspect(Priority = 2)]
+        //[TransactionScopeAspect(Priority = 2)]
         [ValidationAspect(typeof(CompanyRegisterValidator), Priority = 1)]
         public async Task<IResult> Handle(CompanyForRegisterCommand request, CancellationToken cancellationToken)
         {
@@ -46,7 +41,7 @@ namespace Business.Handlers.CommandHandlers.CompanyCommandHandlers
             
             await _companyDal.Add(newCompany);
             var checkIfEmailForRegister = await _companyDal.Get(p => p.Email == request._companyForRegisterRequest.Email);
-            await _companyOperationClaimDal.Add(new CompanyOperationClaim { OperationClaimId = 3, CompanyId = checkIfEmailForRegister.Id });
+            await _companyOperationClaimDal.Add(new CompanyOperationClaim { OperationClaimId = 4, CompanyId = checkIfEmailForRegister.Id });
             return new SuccessResult(Messages.RegistrationIsSuccessful);
         }
     }

@@ -3,6 +3,7 @@ using Core.Entities.ClaimInformation;
 using Core.Entities.Concrete;
 using Entities.Concrete;
 using Entities.DTO.Request.CompanyRequest;
+using Entities.DTO.Request.JobPostingRequest;
 using Entities.DTO.Request.UserRequest;
 
 namespace Business.Mappings.AutoMapper
@@ -16,6 +17,7 @@ namespace Business.Mappings.AutoMapper
             CreateMap<InformationToAddedClaim, User>().ReverseMap();
             CreateMap<InformationToAddedClaim, Company>().ReverseMap();
             CreateMap<GetUsersResponse, User>().ReverseMap();
-        }
+            CreateMap<JobPostingAddRequest, JobPosting>().ReverseMap();
+    }
     }
 }

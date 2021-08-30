@@ -18,11 +18,13 @@ namespace DataAccess.Concrete.EntityFramework.Context
         public DbSet<User> Users { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<CompanyOperationClaim> CompanyOperationClaims { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<JobPosting> JobPostings { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Resume> Resumes { get; set; }
         public DbSet<School> Schools { get; set; }
         public DbSet<WorkExperience> WorkExperiences { get; set; }
+        public DbSet<JobApplication> JobApplications { get; set; }
     }
 }

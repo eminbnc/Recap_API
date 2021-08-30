@@ -39,7 +39,7 @@ namespace Business.Handlers.CommandHandlers.UserCommandHandler
 
             var claims = await _userDal.GetClaims(userToCheck);
             var accessToken = _tokenHelper.CreateToken(_mapper.Map<InformationToAddedClaim>(userToCheck), claims);
-            return new SuccessDataResult<AccessToken>(accessToken, Messages.LoginSuccessful);
+            return new SuccessLoginDataResult<AccessToken>(accessToken, Messages.LoginSuccessful,userToCheck.Id,claims[0].Name);
         }
     }
 }

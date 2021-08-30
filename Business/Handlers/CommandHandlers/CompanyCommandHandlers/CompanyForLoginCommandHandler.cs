@@ -29,7 +29,7 @@ namespace Business.Handlers.CommandHandlers.CompanyCommandHandlers
         [ValidationAspect(typeof(CompanyLoginValidator), Priority = 1)]
         public async Task<IDataResult<AccessToken>> Handle(CompanyForLoginCommand request, CancellationToken cancellationToken)
         {
-            var companyToCheck = await _companyDal .Get(p => p.Email == request._companyForLoginRequest.Email); ;
+            var companyToCheck = await _companyDal .Get(p => p.Email == request._companyForLoginRequest.Email); 
             if (companyToCheck == null) return new ErrorDataResult<AccessToken>(Messages.LoginFailed);
 
             if (!HashingHelper.VerifyPasswordHash(request._companyForLoginRequest.
@@ -38,7 +38,7 @@ namespace Business.Handlers.CommandHandlers.CompanyCommandHandlers
 
             var claims = await _companyDal.GetClaims(companyToCheck);
             var accessToken = _tokenHelper.CreateToken(_mapper.Map<InformationToAddedClaim>(companyToCheck), claims);
-            return new SuccessDataResult<AccessToken>(accessToken, Messages.LoginSuccessful);
+            return new SuccessLoginDataResult<AccessToken>(accessToken, Messages.LoginSuccessful, companyToCheck.Id, claims[0].Name);
         }
     }
 }

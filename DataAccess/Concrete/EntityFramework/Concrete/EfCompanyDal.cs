@@ -16,15 +16,16 @@ namespace DataAccess.Concrete.EntityFramework.Concrete
             await using (var context = new RecapAPIContext())
             {
                 var result = from operationClaim in context.OperationClaims
-                             join userOperationClaim in context.UserOperationClaims
-                             on operationClaim.Id equals userOperationClaim.OperationClaimId
-                             where userOperationClaim.UserId == company.Id
+                             join CompanyOperationClaim in context.CompanyOperationClaims
+                             on operationClaim.Id equals CompanyOperationClaim.OperationClaimId
+                             where CompanyOperationClaim.CompanyId == company.Id
                              select new OperationClaim
                              {
                                  Id = operationClaim.Id,
                                  Name = operationClaim.Name
                              };
                 return result.ToList();
+
             }
         }
     }

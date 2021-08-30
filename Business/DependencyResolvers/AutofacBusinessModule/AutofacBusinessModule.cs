@@ -16,6 +16,9 @@ namespace Business.DependencyResolvers.AutofacBusinessModule
             builder.RegisterType<JWTHelper>().As<ITokenHelper>().SingleInstance();
             builder.RegisterType<EfUserOperationClaimDal>().As<IUserOperationClaimDal>().SingleInstance();
             builder.RegisterType<EfCompanyOperationClaimDal>().As<ICompanyOperationClaimDal>().SingleInstance();
+            builder.RegisterType<EfCompanyDal>().As<ICompanyDal>().SingleInstance();
+            builder.RegisterType<EfJobApplicationDal>().As<IJobApplicationDal>().SingleInstance();
+            builder.RegisterType<EfJobPostingDal>().As<IJobPostingDal>().SingleInstance();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

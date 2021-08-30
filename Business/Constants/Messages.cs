@@ -13,5 +13,9 @@ namespace Business.Constants
         public static string UserList = "Kullanıcılar listelendi";
 
         public static string UserNotFound="Kullanıcı bulunamadı";
+
+        public static string PostingsIAppliedSuccesful = "Başvuru yaptığınız ilanlar başarıyla listelendi";
+
+        public static string JobPostingAddSuccessful = "İş ilanı başarılı bir şekilde eklendi";
     }
 }

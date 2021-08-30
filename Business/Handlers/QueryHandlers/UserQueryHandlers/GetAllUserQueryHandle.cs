@@ -24,7 +24,7 @@ namespace Business.Handlers.QueryHandlers.UserQueryHandlers
         }
 
         [CacheAspect]
-        //[SecuredOperation("admin,editör,company",Priority =1)]
+        [SecuredOperation("admin,editör,company",Priority =1)]
         public async Task<IDataResult<List<GetUsersResponse>>> Handle(GetAllUserQuery request, CancellationToken cancellationToken)
         {
             var getAllUsers = await _userDal.GetAll(p => p.Visibility == true);

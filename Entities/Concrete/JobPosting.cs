@@ -6,7 +6,6 @@ namespace Entities.Concrete
     public class JobPosting:IEntity
     {
         public int Id { get; set; } 
-        public int UserId { get; set; }
         public int CompanyId { get; set; }
         public string Position { get; set; }
         public string JobDetail { get; set; }
