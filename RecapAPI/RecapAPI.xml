@@ -20,6 +20,35 @@
             
             <returns></returns>
         </member>
+        <member name="M:RecapAPI.Controllers.JobApplicationsController.UserJobApplicationAdd(Entities.DTO.Request.JobApplicationRequest.UserJobApplicationRequest)">
+            <summary>
+            Add User Job Application
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RecapAPI.Controllers.JobPostigsController.PostingsAppliedByUserId(System.Int32)">
+            <summary>
+            Postings Applied By user
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RecapAPI.Controllers.ResumesController.ResumeAddByUserId(Microsoft.AspNetCore.Http.IFormFile,System.Int32)">
+            <summary>
+            Resume Add By User Id
+            </summary>
+            <param name="resumeFile"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RecapAPI.Controllers.ResumesController.GetResumeByUserId(System.Int32)">
+            <summary>
+            Get Resumes By User Id
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
         <member name="M:RecapAPI.Controllers.UsersController.Login(Entities.DTO.Request.UserRequest.UserForLoginRequest)">
             <summary>
             User Login Operation
@@ -38,6 +67,14 @@
             <summary>
             Get All Accessible Users
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RecapAPI.Controllers.UsersController.SaveUserPhoto(Microsoft.AspNetCore.Http.IFormFile,System.Int32)">
+            <summary>
+            Updating Or Adding Photos
+            </summary>
+            <param name="imageFile"></param>
+            <param name="id"></param>
             <returns></returns>
         </member>
     </members>

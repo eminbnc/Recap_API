@@ -19,6 +19,9 @@ namespace Business.DependencyResolvers.AutofacBusinessModule
             builder.RegisterType<EfCompanyDal>().As<ICompanyDal>().SingleInstance();
             builder.RegisterType<EfJobApplicationDal>().As<IJobApplicationDal>().SingleInstance();
             builder.RegisterType<EfJobPostingDal>().As<IJobPostingDal>().SingleInstance();
+            builder.RegisterType<EfResumeDal>().As<IResumeDal>().SingleInstance();
+            builder.RegisterType<EfJobApplicationDal>().As<IJobApplicationDal>().SingleInstance();
+
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

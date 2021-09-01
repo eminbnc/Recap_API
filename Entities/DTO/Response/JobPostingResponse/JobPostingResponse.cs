@@ -1,12 +1,12 @@
-﻿using Core.Entities;
-using System;
+﻿using System;
 
-namespace Entities.Concrete
+namespace Entities.DTO.Response.JobPostingResponse
 {
-    public class JobPosting:IEntity
+    public class JobPostingResponse
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
         public int CompanyId { get; set; }
+        public string CompanyName { get; set; }
         public string Position { get; set; }
         public string JobDetail { get; set; }
         public string Experience { get; set; }
@@ -14,5 +14,6 @@ namespace Entities.Concrete
         public DateTime StartingDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Language { get; set; }
+        public int UserId { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Business.Queries.JobPostingQueris;
+﻿using Business.Commands.JobPostingCommands;
+using Business.Queries.JobPostingQueris;
+using Entities.DTO.Request.JobPostingRequest;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +20,11 @@ namespace RecapAPI.Controllers
         {
             _mediator = mediatr;
         }
-
+        /// <summary>
+        /// Postings Applied By user
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> PostingsAppliedByUserId(int id)
         {
@@ -26,6 +32,28 @@ namespace RecapAPI.Controllers
             if (result.Success) return Ok(result);
             return BadRequest(result);
         }
-
+        /// <summary>
+        /// Company Job Posting Add
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> JobPostingAddByCompany(JobPostingAddRequest request)
+        {
+            var result = await _mediator.Send(new JobPostingAddCommand(request));
+            if (result.Success) return Ok(result);
+            return BadRequest(result);
+        }
+        /// <summary>
+        /// Get All Job Posting
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetAllJobPosting()
+        {
+            var result = await _mediator.Send(new GetAllJobQuery());
+            if (result.Success) return Ok(result);
+            return BadRequest(result);
+        }
     }
 }

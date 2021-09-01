@@ -1,7 +1,9 @@
-﻿using Business.Commands.UserCommands;
+﻿using Business.Commands.PhotoCommands;
+using Business.Commands.UserCommands;
 using Business.Queries.UserQueries;
 using Entities.DTO.Request.UserRequest;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -49,6 +51,19 @@ namespace RecapAPI.Controllers
         public async Task<IActionResult> GetAllUser()
         {
             var result = await _mediator.Send(new GetAllUserQuery());
+            if (result.Success) return Ok(result);
+            return BadRequest(result);
+        }
+        /// <summary>
+        /// Updating Or Adding Photos
+        /// </summary>
+        /// <param name="imageFile"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> SaveUserPhoto(IFormFile imageFile, int id)
+        {
+            var result = await _mediator.Send(new UserPhotoSaveCommand(imageFile, id));
             if (result.Success) return Ok(result);
             return BadRequest(result);
         }
