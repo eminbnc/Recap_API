@@ -10,7 +10,7 @@ namespace Business.Commands.CompanyCommands
         public CompanyForLoginRequest _companyForLoginRequest{ get; set; }
         public CompanyForLoginCommand(CompanyForLoginRequest  companyForLoginRequest)
         {
-            _companyForLoginRequest = companyForLoginRequest;
+            _companyForLoginRequest =  companyForLoginRequest;
         }
     }
 }
